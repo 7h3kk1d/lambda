@@ -1,7 +1,9 @@
 package com.jnape.palatable.lambda.functions;
 
+import com.jnape.palatable.lambda.adt.choice.Choice2;
 import com.jnape.palatable.lambda.adt.hlist.Tuple2;
 import com.jnape.palatable.lambda.functor.Applicative;
+import com.jnape.palatable.lambda.functor.Costrong;
 import com.jnape.palatable.lambda.functor.Strong;
 import com.jnape.palatable.lambda.monad.Monad;
 
@@ -19,7 +21,7 @@ import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.consta
  * @param <B> The result type
  */
 @FunctionalInterface
-public interface Fn1<A, B> extends Monad<B, Fn1<A, ?>>, Strong<A, B, Fn1>, Function<A, B> {
+public interface Fn1<A, B> extends Monad<B, Fn1<A, ?>>, Strong<A, B, Fn1>, Costrong<A, B, Fn1>, Function<A, B> {
 
     /**
      * Invoke this function with the given argument.
@@ -156,6 +158,11 @@ public interface Fn1<A, B> extends Monad<B, Fn1<A, ?>>, Strong<A, B, Fn1>, Funct
     @Override
     default <C> Fn1<Tuple2<C, A>, Tuple2<C, B>> strengthen() {
         return t -> t.fmap(this);
+    }
+
+    @Override
+    default <C> Fn1<Choice2<C, A>, Choice2<C, B>> costrengthen() {
+        return ca -> ca.fmap(this);
     }
 
     default Fn1<A, Tuple2<A, B>> carry() {
