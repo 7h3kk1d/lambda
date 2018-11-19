@@ -1,9 +1,12 @@
 package com.jnape.palatable.lambda.lens;
 
+import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.functor.Applicative;
 import com.jnape.palatable.lambda.functor.Functor;
 import com.jnape.palatable.lambda.functor.Profunctor;
+import com.jnape.palatable.lambda.functor.builtin.Const;
 import com.jnape.palatable.lambda.monad.Monad;
+import com.jnape.palatable.lambda.optics.Getting;
 
 import java.util.function.Function;
 
@@ -20,10 +23,15 @@ import java.util.function.Function;
  * @see Lens
  * @see Iso
  */
-public interface LensLike<S, T, A, B, LL extends LensLike> extends Monad<T, LensLike<S, ?, A, B, LL>>, Profunctor<S, T, LensLike<?, ?, A, B, LL>> {
+public interface LensLike<S, T, A, B, LL extends LensLike> extends Monad<T, LensLike<S, ?, A, B, LL>>, Profunctor<S, T, LensLike<?, ?, A, B, LL>>, Getting<A, S, B> {
 
     <F extends Functor, FT extends Functor<T, F>, FB extends Functor<B, F>> FT apply(
             Function<? super A, ? extends FB> fn, S s);
+
+    @Override
+    default Fn2<Function<? super A, ? extends Const<A, B>>, S, A> getting() {
+        return (f, s) -> this.<Const<A, ?>, Const<A, T>, Const<A, B>>apply(f, s).runConst();
+    }
 
     /**
      * Right-to-left composition of lenses. Requires compatibility between A and B.

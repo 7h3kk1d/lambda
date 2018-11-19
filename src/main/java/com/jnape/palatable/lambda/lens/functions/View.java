@@ -3,22 +3,21 @@ package com.jnape.palatable.lambda.lens.functions;
 import com.jnape.palatable.lambda.functions.Fn1;
 import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.functor.builtin.Const;
-import com.jnape.palatable.lambda.lens.LensLike;
+import com.jnape.palatable.lambda.optics.Getting;
 
 /**
- * Given a lens and a "larger" value <code>S</code>, retrieve a "smaller" value <code>A</code> by lifting the lens into
- * {@link Const}.
+ * Given some optic that can be used for {@link Getting} and a "larger" value <code>S</code>, retrieve a "smaller" value
+ * <code>R</code> by lifting the optic into {@link Const}.
  * <p>
  * More idiomatically, this function can be used to treat a lens as a "getter" of <code>A</code>s from <code>S</code>s.
  *
+ * @param <R> the type of the smaller retrieving value
  * @param <S> the type of the larger value
- * @param <T> the type of the larger updated value (unused, but necessary for composition)
  * @param <A> the type of the smaller retrieving value
- * @param <B> the type of the smaller setting value (unused, but necessary for composition)
  * @see Set
  * @see Over
  */
-public final class View<S, T, A, B> implements Fn2<LensLike<S, T, A, B, ?>, S, A> {
+public final class View<R, S, A> implements Fn2<Getting<R, S, A>, S, R> {
 
     private static final View INSTANCE = new View();
 
@@ -26,20 +25,20 @@ public final class View<S, T, A, B> implements Fn2<LensLike<S, T, A, B, ?>, S, A
     }
 
     @Override
-    public A apply(LensLike<S, T, A, B, ?> lens, S s) {
-        return lens.<Const<A, ?>, Const<A, T>, Const<A, B>>apply(Const::new, s).runConst();
+    public R apply(Getting<R, S, A> getting, S s) {
+        return getting.getting().apply(Const::new, s);
     }
 
     @SuppressWarnings("unchecked")
-    public static <S, T, A, B> View<S, T, A, B> view() {
+    public static <R, S, A> View<R, S, A> view() {
         return INSTANCE;
     }
 
-    public static <S, T, A, B> Fn1<S, A> view(LensLike<S, T, A, B, ?> lens) {
-        return View.<S, T, A, B>view().apply(lens);
+    public static <R, S, A> Fn1<S, R> view(Getting<R, S, A> getting) {
+        return View.<R, S, A>view().apply(getting);
     }
 
-    public static <S, T, A, B> A view(LensLike<S, T, A, B, ?> lens, S s) {
-        return view(lens).apply(s);
+    public static <R, S, A> R view(Getting<R, S, A> getting, S s) {
+        return view(getting).apply(s);
     }
 }

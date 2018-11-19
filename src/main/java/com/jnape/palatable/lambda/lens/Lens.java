@@ -2,10 +2,13 @@ package com.jnape.palatable.lambda.lens;
 
 import com.jnape.palatable.lambda.adt.hlist.Tuple2;
 import com.jnape.palatable.lambda.functions.Fn1;
+import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.functions.builtin.fn2.Both;
 import com.jnape.palatable.lambda.functor.Applicative;
 import com.jnape.palatable.lambda.functor.Functor;
+import com.jnape.palatable.lambda.functor.builtin.Const;
 import com.jnape.palatable.lambda.monad.Monad;
+import com.jnape.palatable.lambda.optics.Getting;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -137,7 +140,7 @@ import static com.jnape.palatable.lambda.lens.functions.View.view;
  * @param <B> the type of the "smaller" update value
  */
 @FunctionalInterface
-public interface Lens<S, T, A, B> extends LensLike<S, T, A, B, Lens> {
+public interface Lens<S, T, A, B> extends LensLike<S, T, A, B, Lens>, Getting<A, S, B> {
 
     @Override
     default <U> Lens<S, U, A, B> fmap(Function<? super T, ? extends U> fn) {

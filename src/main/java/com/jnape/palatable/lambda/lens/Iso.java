@@ -6,12 +6,14 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.functor.Applicative;
 import com.jnape.palatable.lambda.functor.Functor;
 import com.jnape.palatable.lambda.functor.Profunctor;
+import com.jnape.palatable.lambda.functor.builtin.Const;
 import com.jnape.palatable.lambda.functor.builtin.Exchange;
 import com.jnape.palatable.lambda.functor.builtin.Identity;
 import com.jnape.palatable.lambda.lens.functions.Over;
 import com.jnape.palatable.lambda.lens.functions.Set;
 import com.jnape.palatable.lambda.lens.functions.View;
 import com.jnape.palatable.lambda.monad.Monad;
+import com.jnape.palatable.lambda.optics.Getting;
 
 import java.util.function.Function;
 
@@ -50,7 +52,7 @@ import static com.jnape.palatable.lambda.lens.functions.View.view;
  * @param <B> the smaller type for mirrored focusing
  */
 @FunctionalInterface
-public interface Iso<S, T, A, B> extends LensLike<S, T, A, B, Iso> {
+public interface Iso<S, T, A, B> extends LensLike<S, T, A, B, Iso>, Getting<A, S, B> {
 
     <P extends Profunctor, F extends Functor, FB extends Functor<B, F>, FT extends Functor<T, F>,
             PAFB extends Profunctor<A, FB, P>,
