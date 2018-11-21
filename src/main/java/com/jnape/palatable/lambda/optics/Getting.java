@@ -7,5 +7,5 @@ import java.util.function.Function;
 
 public interface Getting<R, S, A> {
 
-    Fn2<Function<? super R, ? extends Const<R, A>>, S, R> getting();
+    Fn2<Function<? super A, ? extends Const<R, A>>, S, Const<R, S>> getting();
 }

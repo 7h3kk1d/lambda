@@ -10,6 +10,8 @@ import com.jnape.palatable.lambda.optics.Getting;
 
 import java.util.function.Function;
 
+import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
+
 /**
  * The generic supertype of all types that can be treated as lenses but should preserve type-specific return types in
  * overrides. This type only exists to appease Java's unfortunate parametric type hierarchy constraints. If you're here,
@@ -23,14 +25,17 @@ import java.util.function.Function;
  * @see Lens
  * @see Iso
  */
-public interface LensLike<S, T, A, B, LL extends LensLike> extends Monad<T, LensLike<S, ?, A, B, LL>>, Profunctor<S, T, LensLike<?, ?, A, B, LL>>, Getting<A, S, B> {
+public interface LensLike<S, T, A, B, LL extends LensLike> extends
+        Monad<T, LensLike<S, ?, A, B, LL>>,
+        Profunctor<S, T, LensLike<?, ?, A, B, LL>>,
+        Getting<A, S, A> {
 
     <F extends Functor, FT extends Functor<T, F>, FB extends Functor<B, F>> FT apply(
             Function<? super A, ? extends FB> fn, S s);
 
     @Override
-    default Fn2<Function<? super A, ? extends Const<A, B>>, S, A> getting() {
-        return (f, s) -> this.<Const<A, ?>, Const<A, T>, Const<A, B>>apply(f, s).runConst();
+    default Fn2<Function<? super A, ? extends Const<A, A>>, S, Const<A, S>> getting() {
+        return (f, s) -> this.<Const<A, ?>, Const<A, T>, Const<A, B>>apply(Const::new, s).fmap(constantly(s));
     }
 
     /**
