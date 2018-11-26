@@ -1,5 +1,6 @@
 package com.jnape.palatable.lambda.lens;
 
+import com.jnape.palatable.lambda.functions.Fn1;
 import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.functor.Applicative;
 import com.jnape.palatable.lambda.functor.Functor;
@@ -34,7 +35,7 @@ public interface LensLike<S, T, A, B, LL extends LensLike> extends
             Function<? super A, ? extends FB> fn, S s);
 
     @Override
-    default Fn2<Function<? super A, ? extends Const<A, A>>, S, Const<A, S>> getting() {
+    default Fn2<Fn1<A, Const<A, A>>, S, Const<A, S>> getter() {
         return (f, s) -> this.<Const<A, ?>, Const<A, T>, Const<A, B>>apply(Const::new, s).fmap(constantly(s));
     }
 

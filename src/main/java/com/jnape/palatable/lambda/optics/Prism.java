@@ -9,31 +9,31 @@ import com.jnape.palatable.lambda.functor.Applicative;
 import com.jnape.palatable.lambda.functor.Costrong;
 import com.jnape.palatable.lambda.functor.builtin.Const;
 import com.jnape.palatable.lambda.functor.builtin.Identity;
+import com.jnape.palatable.lambda.functor.builtin.Tagged;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
 
 import static com.jnape.palatable.lambda.adt.Maybe.maybe;
-import static com.jnape.palatable.lambda.adt.choice.Choice2.b;
-import static com.jnape.palatable.lambda.functions.Fn1.fn1;
+import static com.jnape.palatable.lambda.adt.Maybe.nothing;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
+import static com.jnape.palatable.lambda.lens.functions.Pre.pre;
+import static com.jnape.palatable.lambda.lens.functions.Preview.preview;
+import static com.jnape.palatable.lambda.lens.functions.Re.re;
+import static com.jnape.palatable.lambda.lens.functions.Review.review;
 import static com.jnape.palatable.lambda.lens.functions.View.view;
+import static java.util.Collections.emptyMap;
+import static java.util.Collections.singletonMap;
 
-public interface Prism<S, T, A, B> extends Getting<T, B, T> {
+public interface Prism<S, T, A, B> extends AReview<T, B> {
 
     <P extends Costrong, F extends Applicative, FB extends Applicative<B, F>, FT extends Applicative<T, F>,
             PAFB extends Costrong<A, FB, P>,
             PSFT extends Costrong<S, FT, P>> PSFT apply(PAFB pafb, Function<? super T, ? extends FT> pure);
 
     @Override
-    default Fn2<Function<? super T, ? extends Const<T, T>>, B, Const<T, B>> getting() {
-        AReview<T, B> p = bIdentityTagged -> new Tagged<>(this.<Tagged, Identity, Identity<B>, Identity<T>, Tagged<A, Identity<B>>, Tagged<S, Identity<T>>>apply(new Tagged<>(bIdentityTagged.unTagged()), Identity::new).unTagged());
-        return (f, b) -> re(p).apply(fn1(f)).apply(b);
-    }
-
-    static <B, T> Fn1<B, T> hash(Fn1<Tagged<B, Identity<B>>, Tagged<T, Identity<T>>> f) {
-        return b -> f.apply(new Tagged<>(new Identity<>(b))).unTagged().runIdentity();
+    default Fn1<Tagged<B, Identity<B>>, Tagged<T, Identity<T>>> aReview() {
+        return taggedB -> new Tagged<>(this.<Tagged, Identity, Identity<B>, Identity<T>, Tagged<A, Identity<B>>, Tagged<S, Identity<T>>>apply(new Tagged<>(taggedB.unTagged()), Identity::new).unTagged());
     }
 
     static <S, T, A, B> Prism<S, T, A, B> prism(Function<? super B, ? extends T> bt,
@@ -49,76 +49,29 @@ public interface Prism<S, T, A, B> extends Getting<T, B, T> {
         };
     }
 
-    static <S, A> Prism<S, S, A, A> simplePrism(Function<? super S, ? extends Maybe<A>> sa,
+    static <S, A> SimplePrism<S, A> simplePrism(Function<? super S, ? extends Maybe<A>> sa,
                                                 Function<? super A, ? extends S> as) {
-        return prism(as, s -> sa.apply(s).<Choice2<S, A>>fmap(Choice2::b).orElse(Choice2.a(s)));
+        return Prism.<S, S, A, A>prism(as, s -> sa.apply(s).<Choice2<S, A>>fmap(Choice2::b).orElse(Choice2.a(s)))::apply;
     }
 
-    public static <T, B> Fn1<Fn1<T, Const<T, T>>, Fn1<B, Const<T, B>>> re(AReview<T, B> p) {
-        Fn1<B, T> bt = b -> p.apply(new Tagged<>(new Identity<>(b))).unTagged().runIdentity();
-        return tIdentityFn1 -> b -> tIdentityFn1.contraMap(bt).apply(b).fmap(constantly(b));
+    static void main(String[] args) {
+        SimplePrism<Map<String, Integer>, Integer> l = simplePrism(m -> maybe(m.get("foo")), i -> singletonMap("foo", i));
+
+        Map<String, Integer> review = review(l, 1);
+        Integer s = null;
+        Fn1<Integer, Map<String, Integer>> view = view(re(l));
+        Fn1<Integer, Map<String, Integer>> review1 = review(l);
+
+        Maybe<Integer> view1 = view(pre(l), emptyMap());
+        Maybe<Integer> preview = preview(l, emptyMap());
+
+        System.out.println(view1);
     }
 
-
-    public static <S, T, A, B> void playtime(Prism<S, T, A, B> prism) {
-        AReview<T, B> p = bIdentityTagged -> new Tagged<>(prism.<Tagged, Identity, Identity<B>, Identity<T>, Tagged<A, Identity<B>>, Tagged<S, Identity<T>>>apply(new Tagged<>(bIdentityTagged.unTagged()), Identity::new).unTagged());
-        Fn1<Fn1<T, Const<T, T>>, Fn1<B, Const<T, B>>> re = re(p);
-        view((Getting<T, B, T>) () -> (function, b) -> re.apply(fn1(function)).apply(b));
-    }
-
-    public static void main(String[] args) {
-        Function<? super Map<String, Integer>, ? extends Maybe<Integer>> sa = m -> maybe(m.get("foo"));
-        Prism<Map<String, Integer>, Map<String, Integer>, Integer, Integer> prism = simplePrism(sa, i -> Collections.singletonMap("foo", i));
-
-
-
-
-    }
-
-    public static interface AReview<T, B> extends Fn1<Tagged<B, Identity<B>>, Tagged<T, Identity<T>>> {
-    }
-
-        /*
-
-    re :: AReview t b -> Getter b t
-
-
-    type Getter s a = forall f. (Contravariant f, Functor f) => (a -> f a) -> s -> f s
-
-    type AReview t b = Optic' Tagged Identity t b
-    type Optic' p f s a = Optic p f s s a a
-    type Optic p f s t a b = p a (f b) -> p s (f t)
-
-    so...
-
-    type AReview t b = Tagged b (Identity b) -> Tagged t (Identity t)
-    type Getter b t = (t -> f t) -> b -> f b
-
-     */
-
-    public static interface Getter<B, T> extends Fn1<Fn1<T, Identity<T>>, Fn1<B, Identity<B>>> {
-    }
-
-    public static final class Tagged<S, B> implements Costrong<S, B, Tagged> {
-        private final B b;
-
-        public Tagged(B b) {
-            this.b = b;
-        }
-
-        public B unTagged() {
-            return b;
-        }
-
+    interface SimplePrism<S, A> extends Prism<S, S, A, A>, Getter<Const<Maybe<A>, ?>, Const<Maybe<A>, A>, Const<Maybe<A>, S>, S, A> {
         @Override
-        public <C> Tagged<Choice2<C, S>, Choice2<C, B>> costrengthen() {
-            return new Tagged<>(b(b));
-        }
-
-        @Override
-        public <Z, C> Tagged<Z, C> diMap(Function<? super Z, ? extends S> lFn,
-                                         Function<? super B, ? extends C> rFn) {
-            return new Tagged<>(rFn.apply(b));
+        default Fn2<Fn1<A, Const<Maybe<A>, A>>, S, Const<Maybe<A>, S>> getter() {
+            return (f, s) -> this.<Fn1, Const<Maybe<A>, ?>, Const<Maybe<A>, A>, Const<Maybe<A>, S>, Fn1<A, Const<Maybe<A>, A>>, Fn1<S, Const<Maybe<A>, S>>>apply(f, constantly(new Const<>(nothing()))).apply(s);
         }
     }
 }

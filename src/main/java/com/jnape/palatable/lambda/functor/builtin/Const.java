@@ -2,6 +2,7 @@ package com.jnape.palatable.lambda.functor.builtin;
 
 import com.jnape.palatable.lambda.functor.Applicative;
 import com.jnape.palatable.lambda.functor.Bifunctor;
+import com.jnape.palatable.lambda.functor.Contravariant;
 import com.jnape.palatable.lambda.monad.Monad;
 import com.jnape.palatable.lambda.traversable.Traversable;
 
@@ -17,7 +18,7 @@ import java.util.function.Function;
  * @param <A> the left parameter type, and the type of the stored value
  * @param <B> the right (phantom) parameter type
  */
-public final class Const<A, B> implements Monad<B, Const<A, ?>>, Bifunctor<A, B, Const>, Traversable<B, Const<A, ?>> {
+public final class Const<A, B> implements Monad<B, Const<A, ?>>, Bifunctor<A, B, Const>, Traversable<B, Const<A, ?>>, Contravariant<B, Const<A, ?>> {
 
     private final A a;
 
@@ -119,6 +120,12 @@ public final class Const<A, B> implements Monad<B, Const<A, ?>>, Bifunctor<A, B,
     public <C, D> Const<C, D> biMap(Function<? super A, ? extends C> lFn,
                                     Function<? super B, ? extends D> rFn) {
         return new Const<>(lFn.apply(a));
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <Z> Const<A, Z> contraMap(Function<? super Z, ? extends B> fn) {
+        return (Const<A, Z>) this;
     }
 
     @Override
