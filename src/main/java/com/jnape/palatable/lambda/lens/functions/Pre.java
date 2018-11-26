@@ -2,14 +2,17 @@ package com.jnape.palatable.lambda.lens.functions;
 
 import com.jnape.palatable.lambda.adt.Maybe;
 import com.jnape.palatable.lambda.functions.Fn1;
+import com.jnape.palatable.lambda.functions.Fn2;
+import com.jnape.palatable.lambda.functor.Contravariant;
+import com.jnape.palatable.lambda.functor.Functor;
 import com.jnape.palatable.lambda.functor.builtin.Const;
 import com.jnape.palatable.lambda.optics.Getter;
+import com.jnape.palatable.lambda.optics.Getting;
 
 import static com.jnape.palatable.lambda.adt.Maybe.just;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
 
-public final class Pre<A, S> implements Fn1<Getter<Const<Maybe<A>, ?>, Const<Maybe<A>, A>, Const<Maybe<A>, S>, S, A>,
-        Getter<Const<Maybe<A>, ?>, Const<Maybe<A>, Maybe<A>>, Const<Maybe<A>, S>, S, Maybe<A>>> {
+public final class Pre<A, S> implements Fn1<Getting<Maybe<A>, S, A>, Getter<S, Maybe<A>>> {
 
     private static final Pre<?, ?> INSTANCE = new Pre<>();
 
@@ -17,9 +20,14 @@ public final class Pre<A, S> implements Fn1<Getter<Const<Maybe<A>, ?>, Const<May
     }
 
     @Override
-    public Getter<Const<Maybe<A>, ?>, Const<Maybe<A>, Maybe<A>>, Const<Maybe<A>, S>, S, Maybe<A>> apply(
-            Getter<Const<Maybe<A>, ?>, Const<Maybe<A>, A>, Const<Maybe<A>, S>, S, A> getter) {
-        return () -> (f, s) -> f.apply(getter.getter().apply(a -> new Const<>(just(a)), s).runConst()).fmap(constantly(s));
+    public Getter<S, Maybe<A>> apply(Getting<Maybe<A>, S, A> getting) {
+        return new Getter<S, Maybe<A>>() {
+            @Override
+            @SuppressWarnings("unchecked")
+            public <F extends Functor & Contravariant, FA extends Functor<Maybe<A>, F> & Contravariant<Maybe<A>, F>, FS extends Functor<S, F> & Contravariant<S, F>> Fn2<Fn1<Maybe<A>, FA>, S, FS> getter() {
+                return (f, s) -> (FS) f.apply(getting.getting().apply(a -> new Const<>(just(a)), s).runConst()).fmap(constantly(s));
+            }
+        };
     }
 
     @SuppressWarnings("unchecked")
@@ -27,8 +35,7 @@ public final class Pre<A, S> implements Fn1<Getter<Const<Maybe<A>, ?>, Const<May
         return (Pre<A, S>) INSTANCE;
     }
 
-    public static <A, S> Getter<Const<Maybe<A>, ?>, Const<Maybe<A>, Maybe<A>>, Const<Maybe<A>, S>, S, Maybe<A>> pre(
-            Getter<Const<Maybe<A>, ?>, Const<Maybe<A>, A>, Const<Maybe<A>, S>, S, A> getter) {
-        return Pre.<A, S>pre().apply(getter);
+    public static <A, S> Getter<S, Maybe<A>> pre(Getting<Maybe<A>, S, A> getting) {
+        return Pre.<A, S>pre().apply(getting);
     }
 }

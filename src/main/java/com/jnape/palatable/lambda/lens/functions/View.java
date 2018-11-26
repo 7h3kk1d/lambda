@@ -3,7 +3,6 @@ package com.jnape.palatable.lambda.lens.functions;
 import com.jnape.palatable.lambda.functions.Fn1;
 import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.functor.builtin.Const;
-import com.jnape.palatable.lambda.optics.Getter;
 import com.jnape.palatable.lambda.optics.Getting;
 
 /**
@@ -17,7 +16,7 @@ import com.jnape.palatable.lambda.optics.Getting;
  * @see Set
  * @see Over
  */
-public final class View<S, A> implements Fn2<Getter<Const<A, ?>, Const<A, A>, Const<A, S>, S, A>, S, A> {
+public final class View<S, A> implements Fn2<Getting<A, S, A>, S, A> {
 
     private static final View INSTANCE = new View();
 
@@ -25,8 +24,8 @@ public final class View<S, A> implements Fn2<Getter<Const<A, ?>, Const<A, A>, Co
     }
 
     @Override
-    public A apply(Getter<Const<A, ?>, Const<A, A>, Const<A, S>, S, A> getter, S s) {
-        return getter.getter().apply(Const::new, s).runConst();
+    public A apply(Getting<A, S, A> getting, S s) {
+        return getting.getting().apply(Const::new, s).runConst();
     }
 
     @SuppressWarnings("unchecked")
@@ -34,11 +33,11 @@ public final class View<S, A> implements Fn2<Getter<Const<A, ?>, Const<A, A>, Co
         return INSTANCE;
     }
 
-    public static <S, A> Fn1<S, A> view(Getter<Const<A, ?>, Const<A, A>, Const<A, S>, S, A> getter) {
-        return View.<S, A>view().apply(getter);
+    public static <S, A> Fn1<S, A> view(Getting<A, S, A> getting) {
+        return View.<S, A>view().apply(getting);
     }
 
-    public static <S, A> A view(Getter<Const<A, ?>, Const<A, A>, Const<A, S>, S, A> getter, S s) {
-        return view(getter).apply(s);
+    public static <S, A> A view(Getting<A, S, A> getting, S s) {
+        return view(getting).apply(s);
     }
 }

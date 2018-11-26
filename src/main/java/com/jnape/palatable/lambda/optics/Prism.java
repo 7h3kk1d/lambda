@@ -11,19 +11,10 @@ import com.jnape.palatable.lambda.functor.builtin.Const;
 import com.jnape.palatable.lambda.functor.builtin.Identity;
 import com.jnape.palatable.lambda.functor.builtin.Tagged;
 
-import java.util.Map;
 import java.util.function.Function;
 
-import static com.jnape.palatable.lambda.adt.Maybe.maybe;
 import static com.jnape.palatable.lambda.adt.Maybe.nothing;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
-import static com.jnape.palatable.lambda.lens.functions.Pre.pre;
-import static com.jnape.palatable.lambda.lens.functions.Preview.preview;
-import static com.jnape.palatable.lambda.lens.functions.Re.re;
-import static com.jnape.palatable.lambda.lens.functions.Review.review;
-import static com.jnape.palatable.lambda.lens.functions.View.view;
-import static java.util.Collections.emptyMap;
-import static java.util.Collections.singletonMap;
 
 public interface Prism<S, T, A, B> extends AReview<T, B> {
 
@@ -54,23 +45,9 @@ public interface Prism<S, T, A, B> extends AReview<T, B> {
         return Prism.<S, S, A, A>prism(as, s -> sa.apply(s).<Choice2<S, A>>fmap(Choice2::b).orElse(Choice2.a(s)))::apply;
     }
 
-    static void main(String[] args) {
-        SimplePrism<Map<String, Integer>, Integer> l = simplePrism(m -> maybe(m.get("foo")), i -> singletonMap("foo", i));
-
-        Map<String, Integer> review = review(l, 1);
-        Integer s = null;
-        Fn1<Integer, Map<String, Integer>> view = view(re(l));
-        Fn1<Integer, Map<String, Integer>> review1 = review(l);
-
-        Maybe<Integer> view1 = view(pre(l), emptyMap());
-        Maybe<Integer> preview = preview(l, emptyMap());
-
-        System.out.println(view1);
-    }
-
-    interface SimplePrism<S, A> extends Prism<S, S, A, A>, Getter<Const<Maybe<A>, ?>, Const<Maybe<A>, A>, Const<Maybe<A>, S>, S, A> {
+    interface SimplePrism<S, A> extends Prism<S, S, A, A>, Getting<Maybe<A>, S, A> {
         @Override
-        default Fn2<Fn1<A, Const<Maybe<A>, A>>, S, Const<Maybe<A>, S>> getter() {
+        default Fn2<Fn1<A, Const<Maybe<A>, A>>, S, Const<Maybe<A>, S>> getting() {
             return (f, s) -> this.<Fn1, Const<Maybe<A>, ?>, Const<Maybe<A>, A>, Const<Maybe<A>, S>, Fn1<A, Const<Maybe<A>, A>>, Fn1<S, Const<Maybe<A>, S>>>apply(f, constantly(new Const<>(nothing()))).apply(s);
         }
     }
