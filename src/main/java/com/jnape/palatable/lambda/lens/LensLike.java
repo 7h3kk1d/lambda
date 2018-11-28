@@ -8,6 +8,8 @@ import com.jnape.palatable.lambda.functor.Profunctor;
 import com.jnape.palatable.lambda.functor.builtin.Const;
 import com.jnape.palatable.lambda.monad.Monad;
 import com.jnape.palatable.lambda.optics.Getting;
+import com.jnape.palatable.lambda.optics.Iso;
+import com.jnape.palatable.lambda.optics.Lens;
 
 import java.util.function.Function;
 

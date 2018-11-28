@@ -15,8 +15,8 @@ import static com.jnape.palatable.lambda.functions.builtin.fn1.CatMaybes.catMayb
 import static com.jnape.palatable.lambda.functions.builtin.fn2.CartesianProduct.cartesianProduct;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Into.into;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.ReduceLeft.reduceLeft;
-import static com.jnape.palatable.lambda.lens.functions.Set.set;
-import static com.jnape.palatable.lambda.lens.functions.View.view;
+import static com.jnape.palatable.lambda.functions.builtin.fn2.View.view;
+import static com.jnape.palatable.lambda.functions.builtin.fn3.Set.set;
 import static java.lang.String.format;
 import static java.lang.String.join;
 import static java.util.Arrays.asList;

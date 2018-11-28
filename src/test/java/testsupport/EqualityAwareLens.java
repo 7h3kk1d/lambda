@@ -3,9 +3,9 @@ package testsupport;
 import com.jnape.palatable.lambda.functor.Applicative;
 import com.jnape.palatable.lambda.functor.Functor;
 import com.jnape.palatable.lambda.functor.builtin.Const;
-import com.jnape.palatable.lambda.lens.Lens;
 import com.jnape.palatable.lambda.lens.LensLike;
 import com.jnape.palatable.lambda.monad.Monad;
+import com.jnape.palatable.lambda.optics.Lens;
 
 import java.util.Objects;
 import java.util.function.Function;
