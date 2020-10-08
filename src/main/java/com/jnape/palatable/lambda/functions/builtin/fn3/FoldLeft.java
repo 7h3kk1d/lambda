@@ -5,9 +5,9 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.functions.Fn3;
 
 /**
- * Given an <code>Iterable</code> of <code>A</code>s, a starting value <code>B</code>, and a
- * <code>{@link Fn2}&lt;B, A, B&gt;</code>, iteratively accumulate over the <code>Iterable</code>, ultimately returning
- * a final <code>B</code> value. If the <code>Iterable</code> is empty, just return the starting <code>B</code> value.
+ * Given an {@link Iterable} of <code>A</code>s, a starting value <code>B</code>, and a
+ * <code>{@link Fn2}&lt;B, A, B&gt;</code>, iteratively accumulate over the {@link Iterable}, ultimately returning
+ * a final <code>B</code> value. If the {@link Iterable} is empty, just return the starting <code>B</code> value.
  * Note that, as the name implies, this function accumulates from left to right, such that <code>foldLeft(f, 0,
  * asList(1, 2, 3, 4, 5))</code> is evaluated as <code>f(f(f(f(f(0, 1), 2), 3), 4), 5)</code>.
  * <p>

@@ -5,8 +5,8 @@ import com.jnape.palatable.lambda.functions.Fn1;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Drop.drop;
 
 /**
- * Returns the tail of an <code>Iterable</code>; the is, an <code>Iterable</code> of all the elements except for the
- * head element. If the input <code>Iterable</code> is empty, the result is also an empty <code>Iterable</code>;
+ * Returns the tail of an {@link Iterable}; the is, an {@link Iterable} of all the elements except for the
+ * head element. If the input {@link Iterable} is empty, the result is also an empty {@link Iterable};
  *
  * @param <A> the Iterable element type
  */

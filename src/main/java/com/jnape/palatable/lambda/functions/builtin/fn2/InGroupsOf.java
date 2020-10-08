@@ -5,9 +5,9 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.internal.iteration.GroupingIterator;
 
 /**
- * Lazily group the <code>Iterable</code> by returning an <code>Iterable</code> of smaller <code>Iterable</code>s of
+ * Lazily group the {@link Iterable} by returning an {@link Iterable} of smaller {@link Iterable}s of
  * size <code>k</code>. Note that groups are <em>not</em> padded; that is, if <code>k &gt;= n</code>, where
- * <code>n</code> is the number of remaining elements, the final <code>Iterable</code> will have only <code>n</code>
+ * <code>n</code> is the number of remaining elements, the final {@link Iterable} will have only <code>n</code>
  * elements.
  *
  * @param <A> The Iterable element type

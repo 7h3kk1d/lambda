@@ -9,7 +9,7 @@ import static com.jnape.palatable.lambda.functions.builtin.fn1.Not.not;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.DropWhile.dropWhile;
 
 /**
- * Iterate the elements in an <code>Iterable</code>, applying a predicate to each one, returning the first element that
+ * Iterate the elements in an {@link Iterable}, applying a predicate to each one, returning the first element that
  * matches the predicate, wrapped in a {@link Maybe}. If no elements match the predicate, the result is
  * {@link Maybe#nothing()}. This function short-circuits, and so is safe to use on potentially infinite {@link Iterable}
  * instances that guarantee to have an eventually matching element.

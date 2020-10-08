@@ -5,8 +5,8 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.internal.iteration.TakingIterable;
 
 /**
- * Lazily limit the <code>Iterable</code> to <code>n</code> elements by returning an <code>Iterable</code> that stops
- * iteration after the <code>nth</code> element, or the last element of the <code>Iterable</code>, whichever comes
+ * Lazily limit the {@link Iterable} to <code>n</code> elements by returning an {@link Iterable} that stops
+ * iteration after the <code>nth</code> element, or the last element of the {@link Iterable}, whichever comes
  * first.
  *
  * @param <A> The Iterable element type

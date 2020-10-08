@@ -110,8 +110,8 @@ public abstract class Maybe<A> implements
     }
 
     /**
-     * If this value is absent, return the value supplied by <code>lSupplier</code> wrapped in <code>Either.left</code>.
-     * Otherwise, wrap the value in <code>Either.right</code> and return it.
+     * If this value is absent, return the value supplied by <code>lSupplier</code> wrapped in {@link Either#left}.
+     * Otherwise, wrap the value in {@link Either#right} and return it.
      *
      * @param <L>  the left parameter type
      * @param lFn0 the supplier for the left value
@@ -254,8 +254,8 @@ public abstract class Maybe<A> implements
     }
 
     /**
-     * Convenience static factory method for creating a {@link Maybe} from an {@link Either}. If <code>either</code> is
-     * a right value, wrap the value in a <code>just</code> and return it; otherwise, return {@link #nothing()}.
+     * Convenience static factory method for creating a {@link Maybe} from an {@link Either}. If {@link Either} is
+     * a right value, wrap the value in a {@link #just(A)} and return it; otherwise, return {@link #nothing()}.
      *
      * @param either the either instance
      * @param <A>    the potential right value
@@ -277,7 +277,7 @@ public abstract class Maybe<A> implements
     }
 
     /**
-     * Lift a potentially null value into {@link Maybe}. If <code>a</code> is not null, returns <code>just(a)</code>;
+     * Lift a potentially null value into {@link Maybe}. If <code>a</code> is not null, returns {@link #just}<code>(a)</code>;
      * otherwise, returns {@link #nothing()}.
      *
      * @param a   the potentially null value

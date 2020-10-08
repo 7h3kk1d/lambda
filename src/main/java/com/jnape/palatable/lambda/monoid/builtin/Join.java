@@ -4,7 +4,7 @@ import com.jnape.palatable.lambda.functions.Fn1;
 import com.jnape.palatable.lambda.monoid.Monoid;
 
 /**
- * A {@link Monoid} instance formed by <code>String</code> that concats two strings together.
+ * A {@link Monoid} instance formed by {@link String} that concats two strings together.
  *
  * @see Monoid
  */

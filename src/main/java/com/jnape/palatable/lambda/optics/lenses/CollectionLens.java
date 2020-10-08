@@ -19,8 +19,8 @@ public final class CollectionLens {
     }
 
     /**
-     * Convenience static factory method for creating a lens that focuses on a copy of a <code>Collection</code>, given
-     * a function that creates the copy. Useful for composition to avoid mutating a <code>Collection</code> reference.
+     * Convenience static factory method for creating a lens that focuses on a copy of a {@link Collection}, given
+     * a function that creates the copy. Useful for composition to avoid mutating a {@link Collection} reference.
      *
      * @param copyFn the copying function
      * @param <X>    the collection element type

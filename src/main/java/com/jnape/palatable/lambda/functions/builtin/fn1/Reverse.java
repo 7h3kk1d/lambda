@@ -4,8 +4,8 @@ import com.jnape.palatable.lambda.functions.Fn1;
 import com.jnape.palatable.lambda.internal.iteration.ReversingIterable;
 
 /**
- * Given an <code>Iterable</code>, return a reversed representation of that <code>Iterable</code>. Note that reversing
- * is deferred until the returned <code>Iterable</code> is iterated.
+ * Given an {@link Iterable}, return a reversed representation of that {@link Iterable}. Note that reversing
+ * is deferred until the returned {@link Iterable} is iterated.
  *
  * @param <A> The Iterable element type
  */

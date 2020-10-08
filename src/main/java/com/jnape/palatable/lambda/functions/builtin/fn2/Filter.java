@@ -5,7 +5,7 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.internal.iteration.FilteringIterable;
 
 /**
- * Lazily apply a predicate to each element in an <code>Iterable</code>, returning an <code>Iterable</code> of just the
+ * Lazily apply a predicate to each element in an {@link Iterable}, returning an {@link Iterable} of just the
  * elements for which the predicate evaluated to <code>true</code>.
  *
  * @param <A> A type contravariant to the input Iterable element type

@@ -6,9 +6,9 @@ import com.jnape.palatable.lambda.functions.Fn3;
 import com.jnape.palatable.lambda.internal.iteration.ScanningIterator;
 
 /**
- * Given an <code>Iterable</code> of <code>A</code>s, a starting value <code>B</code>, and a
- * <code>{@link Fn2}&lt;B, A, B&gt;</code>, iteratively accumulate over the <code>Iterable</code>, collecting each
- * function application result, finally returning an <code>Iterable</code> of all the results. Note that, as the name
+ * Given an {@link Iterable} of <code>A</code>s, a starting value <code>B</code>, and a
+ * <code>{@link Fn2}&lt;B, A, B&gt;</code>, iteratively accumulate over the {@link Iterable}, collecting each
+ * function application result, finally returning an {@link Iterable} of all the results. Note that, as the name
  * implies, this function accumulates from left to right, such that <code>scanLeft(f, 0, asList(1,2,3,4,5))</code> is
  * evaluated as <code>0, f(0, 1), f(f(0, 1), 2), f(f(f(0, 1), 2), 3), f(f(f(f(0, 1), 2), 3), 4), f(f(f(f(f(0, 1), 2),
  * 3), 4), 5)</code>.

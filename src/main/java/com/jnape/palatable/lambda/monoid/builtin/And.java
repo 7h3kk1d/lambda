@@ -9,7 +9,7 @@ import static com.jnape.palatable.lambda.functions.builtin.fn1.Not.not;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Find.find;
 
 /**
- * A {@link Monoid} instance formed by <code>Boolean</code>. Equivalent to logical <code>&amp;&amp;</code>.
+ * A {@link Monoid} instance formed by {@link Boolean}. Equivalent to logical <code>&amp;&amp;</code>.
  *
  * @see Or
  * @see Monoid

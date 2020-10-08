@@ -4,7 +4,7 @@ import com.jnape.palatable.lambda.functions.Fn1;
 import com.jnape.palatable.lambda.functions.specialized.BiPredicate;
 
 /**
- * Eagerly apply a predicate to each element in an <code>Iterable</code>, returning <code>true</code> if every element
+ * Eagerly apply a predicate to each element in an {@link Iterable}, returning <code>true</code> if every element
  * satisfies the predicate, and <code>false</code> otherwise. This method short-circuits on the first <code>false</code>
  * evaluation.
  *

@@ -5,7 +5,7 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.internal.iteration.MappingIterable;
 
 /**
- * Lazily apply a function to each element in an <code>Iterable</code>, producing an <code>Iterable</code> of the mapped
+ * Lazily apply a function to each element in an {@link Iterable}, producing an {@link Iterable} of the mapped
  * results.
  *
  * @param <A> A type contravariant to the input Iterable element type

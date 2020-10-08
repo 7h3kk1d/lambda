@@ -8,7 +8,7 @@ import java.util.Collection;
 
 /**
  * Given an {@link Fn0} of some {@link Collection} <code>C</code>, create an instance of <code>C</code> and add all of
- * the elements in the provided <code>Iterable</code> to the instance. Note that instances of <code>C</code> must
+ * the elements in the provided {@link Iterable} to the instance. Note that instances of <code>C</code> must
  * support {@link Collection#add} (which is to say, must not throw on invocation).
  *
  * @param <A> the iterable element type

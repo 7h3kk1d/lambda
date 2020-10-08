@@ -8,8 +8,8 @@ import com.jnape.palatable.lambda.internal.iteration.UnfoldingIterator;
 
 /**
  * Given an initial seed value and a function that takes the seed type and produces an <code>{@link Maybe}&lt;{@link
- * Tuple2}&lt;X, Seed&gt;&gt;</code>, where the tuple's first slot represents the next <code>Iterable</code> element,
- * and the second slot represents the next input to the unfolding function, unfold an <code>Iterable</code> of
+ * Tuple2}&lt;X, Seed&gt;&gt;</code>, where the tuple's first slot represents the next {@link Iterable} element,
+ * and the second slot represents the next input to the unfolding function, unfold an {@link Iterable} of
  * <code>X</code>s. Returning {@link Maybe#nothing()} from the unfolding function is a signal that the {@link Iterable}
  * is fully unfolded.
  * <p>

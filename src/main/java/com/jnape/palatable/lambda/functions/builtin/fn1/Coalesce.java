@@ -14,7 +14,7 @@ import static com.jnape.palatable.lambda.functions.builtin.fn3.FoldLeft.foldLeft
 /**
  * Fold an <code>{@link Iterable}&lt;{@link Either}&lt;L, R&gt;&gt;</code> into an <code>{@link Either}&lt;{@link
  * Iterable}&lt;L&gt;, {@link Iterable}&lt;R&gt;&gt;</code>, preserving all results of the side that's returned. That
- * is, if the result is a <code>left</code>, it will contain all left values; if it is a <code>right</code>, it will
+ * is, if the result is a <code>{@link Either#left}</code>, it will contain all left values; if it is a <code>{@link Either#right}</code>, it will
  * contain all right values.
  * <p>
  * It may be useful to think of this as a more efficient version of <code>{@link Merge}&lt;{@link Iterable}&lt;L&gt;,

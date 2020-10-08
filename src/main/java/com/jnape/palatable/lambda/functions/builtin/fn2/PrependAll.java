@@ -5,8 +5,8 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.internal.iteration.PrependingIterator;
 
 /**
- * Lazily prepend each value with of the <code>Iterable</code> with the supplied separator value. An empty
- * <code>Iterable</code> is left untouched.
+ * Lazily prepend each value with of the {@link Iterable} with the supplied separator value. An empty
+ * {@link Iterable} is left untouched.
  *
  * @param <A> the Iterable parameter type
  * @see Intersperse

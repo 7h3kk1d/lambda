@@ -14,7 +14,7 @@ import static com.jnape.palatable.lambda.functions.builtin.fn1.Id.id;
 /**
  * Given a {@link Traversable} of {@link Applicative}s and a pure {@link Applicative} constructor, traverse the
  * elements from left to right, zipping the {@link Applicative}s together and collecting the results. If the
- * {@link Traversable} is empty, simply wrap it in the {@link Applicative} by calling <code>pure</code>.
+ * {@link Traversable} is empty, simply wrap it in the {@link Applicative} by calling {@link Applicative#pure}.
  * <p>
  * Modulo any type-level coercion, this is equivalent to <code>traversable.traverse(id(), pure)</code>.
  * <p>

@@ -8,9 +8,9 @@ import static com.jnape.palatable.lambda.functions.builtin.fn2.Tupler2.tupler;
 import static com.jnape.palatable.lambda.functions.builtin.fn3.ZipWith.zipWith;
 
 /**
- * Zip together two <code>Iterable</code>s into a single <code>Iterable</code> of <code>Tuple2&lt;A, B&gt;</code>. If
- * the input <code>Iterable</code>s differ in size, the resulting <code>Iterable</code> contains only as many pairs as
- * the smallest input <code>Iterable</code>'s elements.
+ * Zip together two {@link Iterable}s into a single {@link Iterable} of <code>{@link Tuple2}&lt;A, B&gt;</code>. If
+ * the input {@link Iterable}s differ in size, the resulting {@link Iterable} contains only as many pairs as
+ * the smallest input {@link Iterable}'s elements.
  *
  * @param <A> The first input Iterable element type, and the type of the first tuple slot in the output Iterable
  * @param <B> The second input Iterable element type, and the type of the second tuple slot in the output Iterable

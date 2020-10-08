@@ -10,7 +10,7 @@ import com.jnape.palatable.lambda.functor.builtin.Identity;
  * way, successively applying some applicative computation to each element and collapsing the results into a single
  * resulting applicative.
  * <p>
- * The same rules that apply to <code>Functor</code> apply to <code>Traversable</code>, along with the following
+ * The same rules that apply to {@link Functor} apply to <code>Traversable</code>, along with the following
  * additional 3 laws:
  * <ul>
  * <li>naturality: <code>t.apply(trav.traverse(f, pure).&lt;Object&gt;fmap(id()).coerce())

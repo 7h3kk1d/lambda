@@ -8,7 +8,7 @@ import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.consta
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Find.find;
 
 /**
- * A {@link Monoid} instance formed by <code>Boolean</code>. Equivalent to logical <code>||</code>.
+ * A {@link Monoid} instance formed by {@link Boolean}. Equivalent to logical <code>||</code>.
  *
  * @see And
  * @see Monoid

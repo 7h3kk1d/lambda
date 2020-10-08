@@ -7,7 +7,7 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import static com.jnape.palatable.lambda.adt.hlist.HList.tuple;
 
 /**
- * Creates a <code>Tuple2</code> from two values.
+ * Creates a {@link Tuple2} from two values.
  *
  * @param <A> The type of the first value; also the first slot type of returned Tuple2
  * @param <B> The type of the second value; also the second slot type of returned Tuple2

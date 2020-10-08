@@ -11,7 +11,7 @@ import java.util.Map;
 import static com.jnape.palatable.lambda.functions.builtin.fn3.FoldLeft.foldLeft;
 
 /**
- * Given an <code>Iterable&lt;V&gt;</code> <code>vs</code> and a key function <code>V -&gt; K</code> <code>f</code>,
+ * Given an <code>{@link Iterable}&lt;V&gt;</code> <code>vs</code> and a key function <code>V -&gt; K</code> <code>f</code>,
  * fold <code>vs</code> into a <code>Map&lt;K, List&lt;V&gt;&gt;</code> by applying <code>f</code> to each element of
  * <code>vs</code>, retaining values that map to the same key in a list, in the order they were iterated in.
  *

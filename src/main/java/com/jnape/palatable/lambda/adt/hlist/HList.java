@@ -231,7 +231,7 @@ public abstract class HList {
     }
 
     /**
-     * The consing of a head element to a tail <code>HList</code>.
+     * The consing of a head element to a tail {@link HList}.
      *
      * @param <Head> the head element type
      * @param <Tail> the HList tail type
@@ -246,7 +246,7 @@ public abstract class HList {
         }
 
         /**
-         * The head element of the <code>HList</code>.
+         * The head element of the {@link HList}.
          *
          * @return the head element
          */
@@ -255,7 +255,7 @@ public abstract class HList {
         }
 
         /**
-         * The remaining tail of the <code>HList</code>; returns an HNil if this is the last element.
+         * The remaining tail of the {@link HList}; returns an HNil if this is the last element.
          *
          * @return the tail
          */
@@ -285,7 +285,7 @@ public abstract class HList {
     }
 
     /**
-     * The empty <code>HList</code>.
+     * The empty {@link HList}.
      */
     public static final class HNil extends HList {
         private static final HNil INSTANCE = new HNil();

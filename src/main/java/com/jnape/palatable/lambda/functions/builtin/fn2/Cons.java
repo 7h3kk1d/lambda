@@ -5,7 +5,7 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.internal.iteration.ConsingIterator;
 
 /**
- * Prepend an element to an <code>Iterable</code>.
+ * Prepend an element to an {@link Iterable}.
  *
  * @param <A> the Iterable element type
  */

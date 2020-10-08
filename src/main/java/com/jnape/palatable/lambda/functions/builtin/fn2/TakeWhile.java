@@ -5,7 +5,7 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.internal.iteration.PredicatedTakingIterable;
 
 /**
- * Lazily limit the <code>Iterable</code> to the first group of contiguous elements that satisfy the predicate by
+ * Lazily limit the {@link Iterable} to the first group of contiguous elements that satisfy the predicate by
  * iterating up to, but not including, the first element for which the predicate evaluates to <code>false</code>.
  *
  * @param <A> The Iterable element type

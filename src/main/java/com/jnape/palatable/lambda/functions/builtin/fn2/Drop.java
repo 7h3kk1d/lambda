@@ -5,9 +5,9 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.internal.iteration.DroppingIterable;
 
 /**
- * Lazily skip the first <code>n</code> elements from an <code>Iterable</code> by returning an <code>Iterable</code>
+ * Lazily skip the first <code>n</code> elements from an {@link Iterable} by returning an {@link Iterable}
  * that begins iteration after the <code>nth</code> element. If <code>n</code> is greater than or equal to the length of
- * the <code>Iterable</code>, an empty <code>Iterable</code> is returned.
+ * the {@link Iterable}, an empty {@link Iterable} is returned.
  *
  * @param <A> The Iterable element type
  * @see DropWhile

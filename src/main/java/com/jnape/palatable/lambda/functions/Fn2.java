@@ -14,7 +14,7 @@ import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.consta
 /**
  * A function taking two arguments.
  * <p>
- * Note that defining {@link Fn2} in terms of <code>Fn1</code> provides a reasonable approximation of currying in the
+ * Note that defining {@link Fn2} in terms of {@link Fn1} provides a reasonable approximation of currying in the
  * form of multiple {@link Fn2#apply} overloads that take different numbers of arguments.
  *
  * @param <A> The first argument type

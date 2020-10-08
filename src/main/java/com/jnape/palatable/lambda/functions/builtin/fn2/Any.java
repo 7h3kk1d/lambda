@@ -5,7 +5,7 @@ import com.jnape.palatable.lambda.functions.specialized.BiPredicate;
 import com.jnape.palatable.lambda.functions.specialized.Predicate;
 
 /**
- * Eagerly apply a predicate to each element in an <code>Iterable</code>, returning <code>true</code> if any element
+ * Eagerly apply a predicate to each element in an {@link Iterable}, returning <code>true</code> if any element
  * satisfies the predicate, and <code>false</code> otherwise. This method short-circuits on the first <code>true</code>
  * evaluation.
  *

@@ -40,8 +40,9 @@ public interface CoProduct2<A, B, CP2 extends CoProduct2<A, B, ?>> {
     /**
      * Diverge this coproduct by introducing another possible type that it could represent. As no morphisms can be
      * provided mapping current types to the new type, this operation merely acts as a convenience method to allow the
-     * use of a more convergent coproduct with a more divergent one; that is, if a <code>CoProduct3&lt;String, Integer,
-     * Boolean&gt;</code> is expected, a <code>CoProduct2&lt;String, Integer&gt;</code> should suffice.
+     * use of a more convergent coproduct with a more divergent one; that is, if a <code>{@link CoProduct3}&lt;
+     * {@link String}, {@link Integer}, {@link Boolean}&gt;</code> is expected, a <code>{@link CoProduct2}&lt;
+     * {@link String}, {@link Integer}&gt;</code> should suffice.
      * <p>
      * Generally, we use inheritance to make this a non-issue; however, with coproducts of differing magnitudes, we
      * cannot guarantee variance compatibility in one direction conveniently at construction time, and in the other

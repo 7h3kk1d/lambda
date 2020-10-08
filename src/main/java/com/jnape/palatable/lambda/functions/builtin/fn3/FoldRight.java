@@ -9,10 +9,10 @@ import static com.jnape.palatable.lambda.functions.builtin.fn2.LazyRec.lazyRec;
 import static com.jnape.palatable.lambda.functor.builtin.Lazy.lazy;
 
 /**
- * Given an <code>Iterable</code> of <code>A</code>s, a starting {@link Lazy lazy} value <code>B</code>, and a
+ * Given an {@link Iterable} of <code>A</code>s, a starting {@link Lazy lazy} value <code>B</code>, and a
  * <code>{@link Fn2}&lt;A, {@link Lazy}&lt;B&gt;, {@link Lazy}&lt;B&gt;&gt;</code>, iteratively accumulate over the
- * <code>Iterable</code>, ultimately returning a final <code>{@link Lazy}&lt;B&gt;</code> value. If the
- * <code>Iterable</code> is empty, just return the starting <code>{@link Lazy}&lt;B&gt;</code> value. This function is
+ * {@link Iterable}, ultimately returning a final <code>{@link Lazy}&lt;B&gt;</code> value. If the
+ * {@link Iterable} is empty, just return the starting <code>{@link Lazy}&lt;B&gt;</code> value. This function is
  * computationally the iterative inverse of {@link FoldLeft}, but uses {@link Lazy} to allow support stack-safe
  * execution.
  * <p>

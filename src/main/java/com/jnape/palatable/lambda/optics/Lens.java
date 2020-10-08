@@ -76,7 +76,7 @@ import static com.jnape.palatable.lambda.optics.functions.View.view;
  * }
  * </pre>
  * However, consider if <code>age</code> could be updated on a <code>Person</code> by being provided a date of birth, in
- * the form of a <code>LocalDate</code>:
+ * the form of a {@link java.time.LocalDate}:
  * <pre>
  * {@code
  * public final class Person {

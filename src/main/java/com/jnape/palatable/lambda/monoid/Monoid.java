@@ -54,8 +54,8 @@ public interface Monoid<A> extends Semigroup<A> {
     }
 
     /**
-     * Homomorphism combined with catamorphism. Convert an <code>Iterable&lt;B&gt;</code> to an
-     * <code>Iterable&lt;A&gt;</code> (that is, an <code>Iterable</code> of elements this monoid is formed over), then
+     * Homomorphism combined with catamorphism. Convert an <code>{@link Iterable}&lt;B&gt;</code> to an
+     * <code>{@link Iterable}&lt;A&gt;</code> (that is, an {@link Iterable} of elements this monoid is formed over), then
      * reduce the result from left to right. Under algebraic data types, this is isomorphic to a flatMap.
      *
      * @param <B> the input Iterable element type

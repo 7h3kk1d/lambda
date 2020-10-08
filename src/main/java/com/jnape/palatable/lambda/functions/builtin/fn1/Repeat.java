@@ -4,7 +4,7 @@ import com.jnape.palatable.lambda.functions.Fn1;
 import com.jnape.palatable.lambda.internal.iteration.RepetitiousIterator;
 
 /**
- * Given a value, return an infinite <code>Iterable</code> that repeatedly iterates that value.
+ * Given a value, return an infinite {@link Iterable} that repeatedly iterates that value.
  *
  * @param <A> The Iterable element type
  */

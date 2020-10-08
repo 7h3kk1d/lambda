@@ -10,7 +10,7 @@ import static com.jnape.palatable.lambda.functions.builtin.fn3.FoldLeft.foldLeft
 
 /**
  * Given an {@link Fn0} of some {@link Map} <code>M</code>, create an instance of <code>M</code> and put all of the
- * entries in the provided <code>Iterable</code> into the instance. Note that instances of <code>M</code> must support
+ * entries in the provided {@link Iterable} into the instance. Note that instances of <code>M</code> must support
  * {@link java.util.Map#put} (which is to say, must not throw on invocation).
  *
  * @param <K> the key element type

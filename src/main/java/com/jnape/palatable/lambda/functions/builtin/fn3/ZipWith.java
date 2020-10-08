@@ -6,8 +6,8 @@ import com.jnape.palatable.lambda.functions.Fn3;
 import com.jnape.palatable.lambda.internal.iteration.ZippingIterator;
 
 /**
- * Zip together two <code>Iterable</code>s by applying a zipping function to the successive elements of each
- * <code>Iterable</code> until one of them runs out of elements. Returns an <code>Iterable</code> containing the
+ * Zip together two {@link Iterable}s by applying a zipping function to the successive elements of each
+ * {@link Iterable} until one of them runs out of elements. Returns an {@link Iterable} containing the
  * results.
  *
  * @param <A> The first input Iterable element type

@@ -48,7 +48,7 @@ public abstract class Either<L, R> implements
     }
 
     /**
-     * Return the value wrapped by this <code>Either</code> if it's a right value; otherwise, return defaultValue.
+     * Return the value wrapped by this {@link Either} if it's a right value; otherwise, return defaultValue.
      *
      * @param defaultValue the value to return if this is a left
      * @return the value wrapped by this Either if right; otherwise, defaultValue
@@ -125,14 +125,14 @@ public abstract class Either<L, R> implements
 
     /**
      * If a right value, unwrap it and apply it to <code>rightFn</code>, returning the resulting
-     * <code>Either&lt;L ,R&gt;</code>. Otherwise, return the left value.
+     * {@link Either}&lt;L ,R&gt;. Otherwise, return the left value.
      * <p>
      * Note that because this monadic form of <code>flatMap</code> only supports mapping over a theoretical right value,
-     * the resulting <code>Either</code> must be invariant on the same left value to flatten properly.
+     * the resulting {@link Either}  must be invariant on the same left value to flatten properly.
      *
      * @param rightFn the function to apply to a right value
      * @param <R2>    the new right parameter type
-     * @return the Either resulting from applying rightFn to this right value, or this left value if left
+     * @return the {@link Either} resulting from applying rightFn to this right value, or this left value if left
      */
     @Override
     @SuppressWarnings("RedundantTypeArguments")
@@ -156,8 +156,8 @@ public abstract class Either<L, R> implements
     }
 
     /**
-     * Given two binary operators over L and R, merge multiple <code>Either&lt;L, R&gt;</code>s into a single
-     * <code>Either&lt;L, R&gt;</code>. Note that <code>merge</code> biases towards left values; that is, if any left
+     * Given two binary operators over L and R, merge multiple {@link Either}&lt;L ,R&gt;s into a single
+     * {@link Either}&lt;L ,R&gt;. Note that <code>merge</code> biases towards left values; that is, if any left
      * value exists, the result will be a left value, such that only unanimous right values result in an ultimate right
      * value.
      *
@@ -178,7 +178,7 @@ public abstract class Either<L, R> implements
     }
 
     /**
-     * Perform side-effects against a wrapped right value, returning back the <code>Either</code> unaltered.
+     * Perform side-effects against a wrapped right value, returning back the {@link Either} unaltered.
      *
      * @param effect the effecting consumer
      * @return the Either, unaltered
@@ -192,7 +192,7 @@ public abstract class Either<L, R> implements
     }
 
     /**
-     * Perform side-effects against a wrapped right or left value, returning back the <code>Either</code> unaltered.
+     * Perform side-effects against a wrapped right or left value, returning back the {@link Either} unaltered.
      *
      * @param leftEffect  the effecting consumer for left values
      * @param rightEffect the effecting consumer for right values
@@ -206,7 +206,7 @@ public abstract class Either<L, R> implements
 
     /**
      * Given two mapping functions (one from an <code>L</code> to a <code>V</code>, one from an <code>R</code> to a
-     * <code>V</code>), unwrap the value stored in this <code>Either</code>, apply the appropriate mapping function,
+     * <code>V</code>), unwrap the value stored in this {@link Either}, apply the appropriate mapping function,
      * and return the result.
      *
      * @param <V>     the result type
@@ -340,7 +340,7 @@ public abstract class Either<L, R> implements
     }
 
     /**
-     * Convert a {@link Maybe}&lt;R&gt; into an <code>Either&lt;L, R&gt;</code>, supplying the left value from
+     * Convert a {@link Maybe}&lt;R&gt; into an {@link Either}&lt;L ,R&gt;, supplying the left value from
      * <code>leftFn</code> in the case of {@link Maybe#nothing()}.
      *
      * @param <L>     the left parameter type

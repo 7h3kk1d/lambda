@@ -217,7 +217,7 @@ public interface Fn1<A, B> extends
     }
 
     /**
-     * Exercise both <code>diMapL</code> and <code>diMapR</code> over this function in the same invocation.
+     * Exercise both {@link #diMapL} and {@link #diMapR} over this function in the same invocation.
      *
      * @param <Z> the new argument type
      * @param <C> the new result type

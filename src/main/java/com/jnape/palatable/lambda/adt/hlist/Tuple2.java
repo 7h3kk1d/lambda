@@ -227,7 +227,7 @@ public class Tuple2<_1, _2> extends HCons<_1, SingletonHList<_2>> implements
     }
 
     /**
-     * Static factory method for creating <code>Tuple2</code>s from {@link java.util.Map.Entry}s.
+     * Static factory method for creating {@link Tuple2}s from {@link java.util.Map.Entry}s.
      *
      * @param entry the map entry
      * @param <K>   the key parameter type, and first (head) element type

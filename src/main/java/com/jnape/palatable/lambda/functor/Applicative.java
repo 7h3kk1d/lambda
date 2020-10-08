@@ -10,7 +10,7 @@ import static com.jnape.palatable.lambda.functions.builtin.fn1.Id.id;
  * An interface representing applicative functors - functors that can have their results combined with other functors
  * of the same instance in a context-free manner.
  * <p>
- * The same rules that apply to <code>Functor</code> apply to <code>Applicative</code>, along with the following
+ * The same rules that apply to {@link Functor} apply to {@link Applicative}, along with the following
  * additional 4 laws:
  * <ul>
  * <li>identity: <code>v.zip(pureId).equals(v)</code></li>
@@ -65,7 +65,7 @@ public interface Applicative<A, App extends Applicative<?, App>> extends Functor
     }
 
     /**
-     * Sequence both this <code>Applicative</code> and <code>appB</code>, discarding this <code>Applicative's</code>
+     * Sequence both this {@link Applicative} and <code>appB</code>, discarding this <code>{@link Applicative}'s</code>
      * result and returning <code>appB</code>. This is generally useful for sequentially performing side-effects.
      *
      * @param appB the other Applicative
@@ -77,8 +77,8 @@ public interface Applicative<A, App extends Applicative<?, App>> extends Functor
     }
 
     /**
-     * Sequence both this <code>Applicative</code> and <code>appB</code>, discarding <code>appB's</code> result and
-     * returning this <code>Applicative</code>. This is generally useful for sequentially performing side-effects.
+     * Sequence both this {@link Applicative} and <code>appB</code>, discarding <code>appB's</code> result and
+     * returning this {@link Applicative}. This is generally useful for sequentially performing side-effects.
      *
      * @param appB the other Applicative
      * @param <B>  the type of appB's parameter

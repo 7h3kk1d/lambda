@@ -6,14 +6,14 @@ import com.jnape.palatable.lambda.functions.Fn2;
 import com.jnape.palatable.lambda.internal.iteration.CombinatorialIterator;
 
 /**
- * Lazily compute the cartesian product of an <code>Iterable&lt;A&gt;</code> and <code>Iterable&lt;B&gt;</code>,
- * returning an <code>Iterable&lt;Tuple2&lt;A, B&gt;&gt;</code>, the <em>products</em> as tuples of
+ * Lazily compute the cartesian product of an <code>{@link Iterable}&lt;A&gt;</code> and <code>Iterable&lt;B&gt;</code>,
+ * returning an <code>{@link Iterable}&lt;{@link Tuple2}&lt;A, B&gt;&gt;</code>, the <em>products</em> as tuples of
  * <em>multiplicand</em> <code>A</code>s and <em>multiplier</em> <code>B</code>s.
  * <p>
- * Note that this algorithm exhaustively pairs all elements from <code>Iterable&lt;B&gt;</code> to the first element of
- * <code>Iterable&lt;A&gt;</code> before advancing to the next element of <code>Iterable&lt;A&gt;</code>, <strong>so if
- * <code>Iterable&lt;B&gt;</code> is infinite, only one element from <code>Iterable&lt;A&gt;</code> will ever be
- * paired</strong>.
+ * Note that this algorithm exhaustively pairs all elements from <code>{@link Iterable}&lt;B&gt;</code> to the first
+ * element of <code>{@link Iterable}&lt;A&gt;</code> before advancing to the next element of
+ * <code>{@link Iterable}&lt;A&gt;</code>, <strong>so if <code>{@link Iterable}&lt;B&gt;</code> is infinite, only one
+ * element from <code>{@link Iterable}&lt;A&gt;</code> will ever be paired</strong>.
  *
  * @param <A> The multiplicand Iterable element type
  * @param <B> The multiplier Iterable element type

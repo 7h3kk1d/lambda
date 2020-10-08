@@ -6,7 +6,7 @@ import com.jnape.palatable.lambda.internal.iteration.CyclicIterable;
 import static java.util.Arrays.asList;
 
 /**
- * Given an <code>Iterable</code>, return an infinite <code>Iterable</code> that repeatedly cycles its elements, in
+ * Given an {@link Iterable}, return an infinite {@link Iterable} that repeatedly cycles its elements, in
  * order.
  *
  * @param <A> The Iterable element type
