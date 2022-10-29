@@ -11,11 +11,14 @@ import com.jnape.palatable.lambda.functor.builtin.Lazy;
 import com.jnape.palatable.lambda.monad.Monad;
 import com.jnape.palatable.lambda.monad.MonadReader;
 import com.jnape.palatable.lambda.monad.MonadRec;
+import com.jnape.palatable.lambda.monad.SafeT;
 import com.jnape.palatable.lambda.monad.transformer.MonadT;
 
+import static com.jnape.palatable.lambda.functions.Fn1.fn1;
 import static com.jnape.palatable.lambda.functions.builtin.fn1.Constantly.constantly;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Into.into;
 import static com.jnape.palatable.lambda.functions.builtin.fn2.Tupler2.tupler;
+import static com.jnape.palatable.lambda.monad.SafeT.safeT;
 
 /**
  * A {@link MonadT monad transformer} for any {@link Fn1 function} from some type <code>R</code> to some
@@ -30,10 +33,10 @@ public final class ReaderT<R, M extends MonadRec<?, M>, A> implements
         Cartesian<R, A, ReaderT<?, M, ?>>,
         MonadT<M, A, ReaderT<R, M, ?>, ReaderT<R, ?, ?>> {
 
-    private final Fn1<? super R, ? extends MonadRec<A, M>> f;
+    private final SafeT<Fn1<R, ?>, MonadRec<A, M>> actual;
 
-    private ReaderT(Fn1<? super R, ? extends MonadRec<A, M>> f) {
-        this.f = f;
+    private ReaderT(SafeT<Fn1<R, ?>, MonadRec<A, M>> actual) {
+        this.actual = actual;
     }
 
     /**
@@ -44,7 +47,7 @@ public final class ReaderT<R, M extends MonadRec<?, M>, A> implements
      * @return the embedded {@link MonadRec}
      */
     public <MA extends MonadRec<A, M>> MA runReaderT(R r) {
-        return f.apply(r).coerce();
+        return actual.<Fn1<R, MonadRec<A, M>>>runSafeT().apply(r).coerce();
     }
 
     /**
@@ -94,7 +97,9 @@ public final class ReaderT<R, M extends MonadRec<?, M>, A> implements
      */
     @Override
     public <B> ReaderT<R, M, B> flatMap(Fn1<? super A, ? extends Monad<B, ReaderT<R, M, ?>>> f) {
-        return readerT(r -> runReaderT(r).flatMap(a -> f.apply(a).<ReaderT<R, M, B>>coerce().runReaderT(r)));
+        return new ReaderT<>(this.actual.flatMap(ma -> safeT(fn1(r -> ma
+                .flatMap(a -> f.apply(a)
+                        .<ReaderT<R, M, B>>coerce().runReaderT(r))))));
     }
 
     /**
@@ -128,7 +133,9 @@ public final class ReaderT<R, M extends MonadRec<?, M>, A> implements
      */
     @Override
     public <B> ReaderT<R, M, B> zip(Applicative<Fn1<? super A, ? extends B>, ReaderT<R, M, ?>> appFn) {
-        return readerT(r -> f.apply(r).zip(appFn.<ReaderT<R, M, Fn1<? super A, ? extends B>>>coerce().runReaderT(r)));
+        return new ReaderT<>(this.actual.zip(safeT(fn1(r -> ma -> ma
+                .zip(appFn.<ReaderT<R, M, Fn1<? super A, ? extends B>>>coerce()
+                             .runReaderT(r))))));
     }
 
     /**
@@ -228,7 +235,7 @@ public final class ReaderT<R, M extends MonadRec<?, M>, A> implements
      */
     public static <R, M extends MonadRec<?, M>, A> ReaderT<R, M, A> readerT(
             Fn1<? super R, ? extends MonadRec<A, M>> fn) {
-        return new ReaderT<>(fn);
+        return new ReaderT<>(SafeT.safeT(fn1(fn::apply)));
     }
 
     /**
